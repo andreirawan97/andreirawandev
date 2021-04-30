@@ -11,6 +11,7 @@ export const colors = {
   mustardYellow: "#f79902",
   paleLeaf: "#ccd4bf",
   ecruWhite: "#f5f3e7",
+  deepPink: "#ed25b4",
   gold: "#ffd700",
   insightsYellow: "#ff972e",
   avpnGreen: "#03b4af",

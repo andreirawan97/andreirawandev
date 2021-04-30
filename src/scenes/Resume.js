@@ -4,9 +4,13 @@ import { ChevronBackOutline, CodeWorking } from "react-ionicons";
 import { Fade } from "react-reveal";
 import { useHistory } from "react-router-dom";
 import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
+  Timeline,
+  Events,
+  UrlButton,
+  ImageEvent,
+  TextEvent,
+  YouTubeEvent,
+} from "@merc/react-timeline";
 
 import {
   AvpnImage,
@@ -23,9 +27,7 @@ import {
 import { Card, DottedList } from "../components";
 import { colors, fonts, mediaQuery } from "../constants/style";
 import { Pressable, Text } from "../core-ui";
-
-import "react-vertical-timeline-component/style.min.css";
-import "./Resume.css";
+import { PROJECT_LIST } from "../data/projectList";
 
 export default function Resume() {
   const history = useHistory();
@@ -207,7 +209,85 @@ export default function Resume() {
           <Text style={styles.header2}>My Latest Works and Projects</Text>
         </Fade>
 
-        <VerticalTimeline>
+        <Timeline theme="">
+          <Events>
+            <TextEvent date="2017" text="**Inventory App**">
+              <Text style={styles.projectOrganization}>
+                at 70 Farenheit Koffie
+              </Text>
+              <Text style={styles.projectDesc}>
+                Making a simple inventory app for managing stock.
+              </Text>
+
+              <Text style={styles.projectDate}>January 2017-July 2017</Text>
+            </TextEvent>
+
+            <ImageEvent
+              date="2019"
+              text="**AVPN 2019**"
+              src={AvpnImage}
+              alt="AVPN"
+            >
+              <Text style={styles.projectOrganization}>at KodeFox, Inc</Text>
+              <Text style={styles.projectDesc}>
+                AVPN is a conference app that helps attendance to view venue,
+                chat with speaker, and see schedules
+              </Text>
+              <Text style={styles.projectDate}>April 2019 - July 2019</Text>
+            </ImageEvent>
+
+            <ImageEvent
+              date="2019"
+              text="**Vision-UI**"
+              src={VisionUIImage}
+              alt="VISION UI"
+            >
+              <Text style={styles.projectOrganization}>at KodeFox, Inc</Text>
+              <Text style={styles.projectDesc}>
+                Vision-UI is a framework for rendering mobile apps using JSON.
+              </Text>
+              <Text style={styles.projectDate}>July 2019 - October 2019</Text>
+            </ImageEvent>
+
+            <ImageEvent
+              date="2019"
+              text="**Insights**"
+              src={InsightsImage}
+              alt="insights"
+            >
+              <Text style={styles.projectOrganization}>at KodeFox, Inc</Text>
+              <Text style={styles.projectDesc}>
+                Insights is a web app that helps Project Manager to track
+                project and helps Client to see their app status and progress.
+              </Text>
+              <Text style={styles.projectDate}>
+                October 2019 - December 2019
+              </Text>
+            </ImageEvent>
+            <ImageEvent
+              date="2020"
+              text="**PruHub**"
+              src={PruHubImage}
+              alt="PruHub"
+            >
+              <Text style={styles.projectOrganization}>at KodeFox, Inc</Text>
+              <Text style={styles.projectDesc}>
+                Developing Prudential internal application using Vision-UI
+              </Text>
+              <Text style={styles.projectDate}>January 2020 - August 2020</Text>
+            </ImageEvent>
+            <ImageEvent date="2021" text="**DBO**" src={DBOImage} alt="DBO">
+              <Text style={styles.projectOrganization}>at KodeFox, Inc</Text>
+              <Text style={styles.projectDesc}>
+                DBO or Depo Bangunan Online is an app to help business owner to
+                procure stuffs.
+              </Text>
+              <Text style={styles.projectDate}>February 2021 - Present</Text>
+            </ImageEvent>
+          </Events>
+        </Timeline>
+
+        {/* <VerticalTimeline>
           <VerticalTimelineElement
             contentStyle={{ background: colors.white }}
             contentArrowStyle={{ borderRight: `7px solid ${colors.white}` }}
@@ -326,8 +406,7 @@ export default function Resume() {
               procure stuffs.
             </p>
           </VerticalTimelineElement>
-        </VerticalTimeline>
-
+        </VerticalTimeline> */}
         <div css={styles.dotSeparator} />
       </div>
     </div>
@@ -470,5 +549,19 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     marginTop: 21,
+  }),
+  projectOrganization: css({
+    fontSize: fonts.sizes.extraSmall,
+    fontWeight: "300",
+    marginTop: 8,
+    marginBottom: 8,
+  }),
+  projectDesc: css({
+    fontSize: fonts.sizes.extraSmall,
+  }),
+  projectDate: css({
+    fontSize: fonts.sizes.ant,
+    color: colors.deepPink,
+    marginTop: 12,
   }),
 };
