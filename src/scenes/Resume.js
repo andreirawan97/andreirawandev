@@ -1,16 +1,9 @@
 import { css } from "@emotion/react";
 import { useState } from "react";
-import { ChevronBackOutline, CodeWorking } from "react-ionicons";
+import { ChevronBackOutline } from "react-ionicons";
 import { Fade } from "react-reveal";
 import { useHistory } from "react-router-dom";
-import {
-  Timeline,
-  Events,
-  UrlButton,
-  ImageEvent,
-  TextEvent,
-  YouTubeEvent,
-} from "@merc/react-timeline";
+import { Timeline, Events, ImageEvent, TextEvent } from "@merc/react-timeline";
 
 import {
   AvpnImage,
@@ -27,7 +20,6 @@ import {
 import { Card, DottedList } from "../components";
 import { colors, fonts, mediaQuery } from "../constants/style";
 import { Pressable, Text } from "../core-ui";
-import { PROJECT_LIST } from "../data/projectList";
 
 export default function Resume() {
   const history = useHistory();
