@@ -9,6 +9,7 @@ import PruHubImage from "./pruHub.png";
 import VisionUIImage from "./visionUI.png";
 import DBOImage from "./dbo.png";
 import InsightsImage from "./insights.png";
+import pokedexXYZImage from "./pokedex-xyz.png";
 
 export {
   MyImage,
@@ -22,4 +23,5 @@ export {
   VisionUIImage,
   DBOImage,
   InsightsImage,
+  pokedexXYZImage,
 };

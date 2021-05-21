@@ -1,25 +1,16 @@
 import { css } from "@emotion/react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { ChevronBackOutline } from "react-ionicons";
 import { Fade } from "react-reveal";
 import { useHistory } from "react-router-dom";
 import { Timeline, Events, ImageEvent, TextEvent } from "@merc/react-timeline";
 
-import {
-  AvpnImage,
-  CsicImage,
-  DBOImage,
-  IfraImage,
-  InsightsImage,
-  JsImage,
-  MoreImage,
-  PruHubImage,
-  UmnImage,
-  VisionUIImage,
-} from "../assets";
+import { CsicImage, IfraImage, JsImage, MoreImage, UmnImage } from "../assets";
 import { Card, DottedList } from "../components";
 import { colors, fonts, mediaQuery } from "../constants/style";
 import { Pressable, Text } from "../core-ui";
+import { works } from "../data/works";
+import { projects } from "../data/projects";
 
 export default function Resume() {
   const history = useHistory();
@@ -198,207 +189,83 @@ export default function Resume() {
 
         <Fade top>
           <Text style={styles.header1}>Projects</Text>
-          <Text style={styles.header2}>My Latest Works and Projects</Text>
+          <Text style={styles.header2}>My Latest Projects</Text>
+        </Fade>
+
+        <div css={styles.projectsContainer}>
+          {projects.map((project) => (
+            <div className={styles.projectContainer}>
+              <Text style={styles.projectTitle}>{project.title}</Text>
+              <Text style={styles.projectDescLight}>{project.description}</Text>
+
+              <div css={styles.projectLinkContainer}>
+                <Text
+                  style={styles.open}
+                  onClick={() => {
+                    window.open(project.projectLink);
+                  }}
+                >
+                  Open
+                </Text>
+
+                <Text
+                  style={styles.viewMore}
+                  onClick={() => {
+                    window.open(project.viewMore);
+                  }}
+                >
+                  View More
+                </Text>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <Fade top>
+          <Text style={styles.header2}>My Latest Works</Text>
         </Fade>
 
         <Timeline theme="">
           <Events>
-            <TextEvent date="2017" text="**Inventory App**">
-              <Text style={styles.projectOrganization}>
-                at 70 Farenheit Koffie
-              </Text>
-              <Text style={styles.projectDesc}>
-                Making a simple inventory app for managing stock.
-              </Text>
+            {works.map((work) => {
+              const {
+                date,
+                projectDate,
+                projectDescription,
+                projectOrganization,
+                text,
+                image,
+              } = work;
 
-              <Text style={styles.projectDate}>January 2017-July 2017</Text>
-            </TextEvent>
-
-            <ImageEvent
-              date="2019"
-              text="**AVPN 2019**"
-              src={AvpnImage}
-              alt="AVPN"
-            >
-              <Text style={styles.projectOrganization}>at KodeFox, Inc</Text>
-              <Text style={styles.projectDesc}>
-                AVPN is a conference app that helps attendance to view venue,
-                chat with speaker, and see schedules
-              </Text>
-              <Text style={styles.projectDate}>April 2019 - July 2019</Text>
-            </ImageEvent>
-
-            <ImageEvent
-              date="2019"
-              text="**Vision-UI**"
-              src={VisionUIImage}
-              alt="VISION UI"
-            >
-              <Text style={styles.projectOrganization}>at KodeFox, Inc</Text>
-              <Text style={styles.projectDesc}>
-                Vision-UI is a framework for rendering mobile apps using JSON.
-              </Text>
-              <Text style={styles.projectDate}>July 2019 - October 2019</Text>
-            </ImageEvent>
-
-            <ImageEvent
-              date="2019"
-              text="**Insights**"
-              src={InsightsImage}
-              alt="insights"
-            >
-              <Text style={styles.projectOrganization}>at KodeFox, Inc</Text>
-              <Text style={styles.projectDesc}>
-                Insights is a web app that helps Project Manager to track
-                project and helps Client to see their app status and progress.
-              </Text>
-              <Text style={styles.projectDate}>
-                October 2019 - December 2019
-              </Text>
-            </ImageEvent>
-            <ImageEvent
-              date="2020"
-              text="**PruHub**"
-              src={PruHubImage}
-              alt="PruHub"
-            >
-              <Text style={styles.projectOrganization}>at KodeFox, Inc</Text>
-              <Text style={styles.projectDesc}>
-                Developing Prudential internal application using Vision-UI
-              </Text>
-              <Text style={styles.projectDate}>January 2020 - August 2020</Text>
-            </ImageEvent>
-            <ImageEvent date="2021" text="**DBO**" src={DBOImage} alt="DBO">
-              <Text style={styles.projectOrganization}>at KodeFox, Inc</Text>
-              <Text style={styles.projectDesc}>
-                DBO or Depo Bangunan Online is an app to help business owner to
-                procure stuffs.
-              </Text>
-              <Text style={styles.projectDate}>February 2021 - Present</Text>
-            </ImageEvent>
+              return (
+                <>
+                  {image ? (
+                    <ImageEvent date={date} text={text} src={image} alt="Image">
+                      <Text style={styles.projectOrganization}>
+                        at {projectOrganization}
+                      </Text>
+                      <Text style={styles.projectDesc}>
+                        {projectDescription}
+                      </Text>
+                      <Text style={styles.projectDate}>{projectDate}</Text>
+                    </ImageEvent>
+                  ) : (
+                    <TextEvent date={date} text={text}>
+                      <Text style={styles.projectOrganization}>
+                        at {projectOrganization}
+                      </Text>
+                      <Text style={styles.projectDesc}>
+                        {projectDescription}
+                      </Text>
+                      <Text style={styles.projectDate}>{projectDate}</Text>
+                    </TextEvent>
+                  )}
+                </>
+              );
+            })}
           </Events>
         </Timeline>
 
-        {/* <VerticalTimeline>
-          <VerticalTimelineElement
-            contentStyle={{ background: colors.white }}
-            contentArrowStyle={{ borderRight: `7px solid ${colors.white}` }}
-            date="January 2017 - July 2017"
-            dateClassName="projectDate"
-            iconStyle={{
-              background: colors.pastelRed,
-            }}
-            icon={<CodeWorking color={colors.white} />}
-          >
-            <h3 className="vertical-timeline-element-title">Inventory App</h3>
-            <h4 className="vertical-timeline-element-subtitle">
-              at 70 Farenheit Koffie
-            </h4>
-            <p>Making a simple inventory app for managing stock.</p>
-          </VerticalTimelineElement>
-          <VerticalTimelineElement
-            date="April 2019 - July 2019"
-            dateClassName="projectDate"
-            iconStyle={{ background: colors.avpnGreen, color: "#fff" }}
-            icon={<CodeWorking />}
-            contentStyle={{ background: colors.white }}
-            contentArrowStyle={{ borderRight: `7px solid ${colors.white}` }}
-          >
-            <h3 className="vertical-timeline-element-title">AVPN 2019</h3>
-            <h4 className="vertical-timeline-element-subtitle">
-              at KodeFox, Inc
-            </h4>
-            <div css={styles.projectImage}>
-              <img alt="" src={AvpnImage} width={150} height={80} />
-            </div>
-            <p>
-              AVPN is a conference app that helps attendance to view venue, chat
-              with speaker, and see schedules
-            </p>
-          </VerticalTimelineElement>
-          <VerticalTimelineElement
-            date="July 2019 - October 2019"
-            dateClassName="projectDate"
-            iconStyle={{ background: "rgb(233, 30, 99)", color: "#fff" }}
-            icon={<CodeWorking />}
-            contentStyle={{ background: colors.white }}
-            contentArrowStyle={{ borderRight: `7px solid ${colors.white}` }}
-          >
-            <h3 className="vertical-timeline-element-title">Vision-UI</h3>
-            <h4 className="vertical-timeline-element-subtitle">
-              at KodeFox, Inc
-            </h4>
-            <div css={styles.projectImage}>
-              <img alt="" src={VisionUIImage} width={70} height={70} />
-            </div>
-            <p>
-              Vision-UI is a framework for rendering mobile apps using JSON.
-            </p>
-          </VerticalTimelineElement>
-          <VerticalTimelineElement
-            date="October 2019 - December 2019"
-            dateClassName="projectDate"
-            iconStyle={{ background: colors.insightsYellow, color: "#fff" }}
-            icon={<CodeWorking />}
-            contentStyle={{ background: colors.white }}
-            contentArrowStyle={{ borderRight: `7px solid ${colors.white}` }}
-          >
-            <h3 className="vertical-timeline-element-title">Insights</h3>
-            <h4 className="vertical-timeline-element-subtitle">
-              at KodeFox, Inc
-            </h4>
-            <div css={styles.projectImage}>
-              <img alt="" src={InsightsImage} width={150} height={40} />
-            </div>
-            <p>
-              Insights is a web app that helps Project Manager to track project
-              and helps Client to see their app status and progress.
-            </p>
-          </VerticalTimelineElement>
-          <VerticalTimelineElement
-            date="January 2020 - August 2020"
-            dateClassName="projectDate"
-            iconStyle={{ background: "rgb(233, 30, 99)", color: "#fff" }}
-            icon={<CodeWorking />}
-            contentStyle={{ background: colors.white }}
-            contentArrowStyle={{ borderRight: `7px solid ${colors.white}` }}
-          >
-            <h3 className="vertical-timeline-element-title">Vision-UI 2.0</h3>
-            <h4 className="vertical-timeline-element-subtitle">
-              at KodeFox, Inc
-            </h4>
-            <div css={styles.projectImage}>
-              <img alt="" src={VisionUIImage} width={70} height={70} />
-            </div>
-            <div css={styles.projectImage}>
-              <img alt="" src={PruHubImage} width={150} height={45} />
-            </div>
-            <p>
-              Like the previous one but this time develop an internal app from
-              Prudential using Vision-UI framework.
-            </p>
-          </VerticalTimelineElement>
-          <VerticalTimelineElement
-            date="February 2021 - Present"
-            dateClassName="projectDate"
-            iconStyle={{ background: colors.dboBlue, color: "#fff" }}
-            icon={<CodeWorking />}
-            contentStyle={{ background: colors.white }}
-            contentArrowStyle={{ borderRight: `7px solid ${colors.white}` }}
-          >
-            <h3 className="vertical-timeline-element-title">DBO</h3>
-            <h4 className="vertical-timeline-element-subtitle">
-              at KodeFox, Inc
-            </h4>
-            <div css={styles.projectImage}>
-              <img alt="" src={DBOImage} width={70} height={70} />
-            </div>
-            <p>
-              DBO or Depo Bangunan Online is an app to help business owner to
-              procure stuffs.
-            </p>
-          </VerticalTimelineElement>
-        </VerticalTimeline> */}
         <div css={styles.dotSeparator} />
       </div>
     </div>
@@ -555,5 +422,42 @@ const styles = {
     fontSize: fonts.sizes.ant,
     color: colors.deepPink,
     marginTop: 12,
+  }),
+  projectsContainer: css({
+    marginBottom: 60,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+  }),
+  projectContainer: css({
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: 12,
+  }),
+  projectTitle: css({
+    marginBottom: 8,
+    fontWeight: "bold",
+    color: colors.white,
+  }),
+  projectDescLight: css({
+    fontSize: fonts.sizes.extraSmall,
+    color: colors.white,
+  }),
+  projectLinkContainer: css({
+    display: "flex",
+    flexDirection: "row",
+    marginTop: 8,
+    marginBottom: 12,
+  }),
+  open: css({
+    color: colors.pastelRed,
+    fontWeight: "bold",
+    cursor: "pointer",
+    marginRight: 24,
+  }),
+  viewMore: css({
+    color: colors.pastelRed,
+    fontWeight: "bold",
+    cursor: "pointer",
   }),
 };

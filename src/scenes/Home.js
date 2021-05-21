@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 import { MyImage } from "../assets/";
 import { Button } from "../components";
-import { aboutMe } from "../constants/aboutMe";
+import { aboutMe } from "../data/aboutMe";
 import { colors, fonts } from "../constants/style";
 import { Row, Text } from "../core-ui";
 import useWindowDimensions from "../helpers/useWindowDimensions";
