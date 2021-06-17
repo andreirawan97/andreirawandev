@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { Fade } from "react-reveal";
 import { SocialIcon } from "react-social-icons";
 import Wave from "react-wavify";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { MyImage } from "../assets/";
 import { Button } from "../components";
@@ -66,6 +66,13 @@ export default function Home() {
 
           <Row style={styles.buttonsContainer}>
             <Button title="View Resume" onClick={onViewResumeClick} />
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/files/AndreCV.pdf"
+              download
+            >
+              <Text style={styles.downloadCV}>Download Resume</Text>
+            </Link>
           </Row>
         </Fade>
       </div>
@@ -176,5 +183,11 @@ const styles = {
   }),
   socialMediaIcon: css({
     marginRight: 14,
+  }),
+  downloadCV: css({
+    marginLeft: 14,
+    color: colors.pastelRed,
+    fontWeight: "bold",
+    fontSize: fonts.sizes.small,
   }),
 };
