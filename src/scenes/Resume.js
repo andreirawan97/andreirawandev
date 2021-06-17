@@ -197,16 +197,21 @@ export default function Resume() {
             <div className={styles.projectContainer}>
               <Text style={styles.projectTitle}>{project.title}</Text>
               <Text style={styles.projectDescLight}>{project.description}</Text>
+              <Text style={styles.usedTech}>
+                Used technologies: {project.usedTechnologies}
+              </Text>
 
               <div css={styles.projectLinkContainer}>
-                <Text
-                  style={styles.open}
-                  onClick={() => {
-                    window.open(project.projectLink);
-                  }}
-                >
-                  Open
-                </Text>
+                {project.projectLink && (
+                  <Text
+                    style={styles.open}
+                    onClick={() => {
+                      window.open(project.projectLink);
+                    }}
+                  >
+                    Open
+                  </Text>
+                )}
 
                 <Text
                   style={styles.viewMore}
@@ -447,7 +452,7 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     marginTop: 8,
-    marginBottom: 12,
+    marginBottom: 24,
   }),
   open: css({
     color: colors.pastelRed,
@@ -459,5 +464,11 @@ const styles = {
     color: colors.pastelRed,
     fontWeight: "bold",
     cursor: "pointer",
+  }),
+  usedTech: css({
+    fontWeight: "400",
+    color: colors.white,
+    fontSize: fonts.sizes.extraSmall,
+    marginTop: 4,
   }),
 };

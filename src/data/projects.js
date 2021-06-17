@@ -11,4 +11,10 @@ export const projects = [
     projectLink: "https://pokedex-xyz.netlify.app",
     image: pokedexXYZImage,
   },
+  {
+    title: "Fluid React Native",
+    description: "A simple wrapper to animate your React Native component.",
+    usedTechnologies: "Typescipt, React Native",
+    viewMore: "https://github.com/andreirawan97/FluidReactNative",
+  },
 ];
